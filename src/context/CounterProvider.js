@@ -1,24 +1,20 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import CounterContext from "./CounterContext";
+import counterReducer from "./counterReducer";
 
 // 3- Creating our provider
 const CounterProvider = ({ children }) => {
 
     // Our logic code:
-    const [counter, setCounter] = useState(0)
-
-    // To increment
-    const handleIncrement = () => {
-        setCounter(counter + 1)
+    const initState = {
+        counter: 0,
     }
 
-    // To decrement
-    const handleDecrement = () => {
-        setCounter(counter - 1)
-    }
+    const [state, dispatch] = useReducer(counterReducer, initState)
 
+    
     return (
-        <CounterContext.Provider value={{ counter, handleIncrement, handleDecrement }}>
+        <CounterContext.Provider value={{ state, dispatch }}>
             {children}
         </CounterContext.Provider>
     )

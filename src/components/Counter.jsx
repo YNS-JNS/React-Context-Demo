@@ -58,18 +58,18 @@ const ResultCounter = styled.div`
 const Counter = () => {
 
     // 5- Call context using useContext hook
-    const { counter, handleIncrement, handleDecrement } = useContext(CounterContext)
-
+    const { state, dispatch } = useContext(CounterContext)
+    console.log(state)
     return (
         <WrapperCounter>
             <Container>
                 <CounterSection>
-                    <ResultCounter> {counter} </ResultCounter>
+                    <ResultCounter> {state.counter} </ResultCounter>
                 </CounterSection>
 
                 <div>
-                    <Button onClick={handleIncrement} > <FaPlus /> </Button>
-                    <Button onClick={handleDecrement} > <FaMinus /> </Button>
+                    <Button onClick={()=> dispatch({ type: 'INCREMENT' })} > <FaPlus /> </Button>
+                    <Button onClick={()=> dispatch({ type: 'DECREMENT' })} > <FaMinus /> </Button>
                 </div>
             </Container>
         </WrapperCounter>
